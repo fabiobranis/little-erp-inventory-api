@@ -1,8 +1,11 @@
-import express from 'express';
+import express, { Express } from 'express';
 import router from './src/routes';
-import { PORT } from './config';
+import { DB_CLIENT, PG_CONNECTION_STRING, PG_SEARCH_PATH, PORT } from './environment';
+import { initializeDatabase } from './infra';
 
-const app = express();
+initializeDatabase(DB_CLIENT, PG_CONNECTION_STRING, [PG_SEARCH_PATH]);
+
+const app: Express = express();
 
 app.use(express.json());
 
